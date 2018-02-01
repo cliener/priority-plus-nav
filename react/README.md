@@ -6,14 +6,14 @@
 
 React version of `priority-plus-nav` - an ARIA compliant priority plus menu.
 
-[build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
-[build]: https://travis-ci.org/user/repo
+[build-badge]: https://img.shields.io/travis/cliener/priority-plus-nav/master.png?style=flat-square
+[build]: https://travis-ci.org/cliener/priority-plus-nav
 
 [npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
-[npm]: https://www.npmjs.org/package/npm-package
+[npm]: https://www.npmjs.org/package/react-priority-plus-nav
 
-[coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/user/repo
+[coveralls-badge]: https://img.shields.io/coveralls/cliener/repo/master.png?style=flat-square
+[coveralls]: https://coveralls.io/github/cliener/repo
 
 ## Parameters
 

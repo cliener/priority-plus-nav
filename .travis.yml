@@ -1,0 +1,22 @@
+sudo: false
+
+language: node_js
+node_js:
+  - 4
+  - 6
+  - 8
+
+cache:
+  directories:
+    -$HOME/.npm
+
+before_install:
+  - cd react
+  - npm install coveralls
+  - git config --global user.email "rez@iinet.net.au"
+  - git config --global user.name "Chris Lienert"
+
+script: "npm run test:coverage"
+
+after_success:
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js

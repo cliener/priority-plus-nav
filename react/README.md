@@ -2,7 +2,7 @@
 
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
-[![Coverage Status](https://coveralls.io/repos/github/cliener/create-react-app/badge.svg?branch=master)](https://coveralls.io/github/cliener/create-react-app?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/cliener/priority-plus-nav/badge.svg?branch=master)](https://coveralls.io/github/cliener/priority-plus-nav?branch=master)
 
 React version of `priority-plus-nav` - an ARIA compliant priority plus menu.
 

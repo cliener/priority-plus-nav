@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
+import React, {Component} from "react"
+import {render} from "react-dom"
 
-import PriorityPlusNav from '../../src'
+import PriorityPlusNav from "../../src"
 import "../../src/ppnav.scss";
 import "./demo.scss";
 
@@ -25,4 +25,4 @@ class Demo extends Component {
   }
 }
 
-render(<Demo/>, document.querySelector('#demo'))
+render(<Demo/>, document.querySelector("#demo"))

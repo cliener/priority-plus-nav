@@ -1,7 +1,7 @@
 # react-priority-plus-nav
 
 [![Travis][build-badge]][build]
-[![npm package][npm-badge]][npm]
+[![npm version](https://badge.fury.io/js/react-priority-plus-nav.svg)](https://badge.fury.io/js/react-priority-plus-nav)
 [![Coverage Status](https://coveralls.io/repos/github/cliener/priority-plus-nav/badge.svg?branch=master)](https://coveralls.io/github/cliener/priority-plus-nav?branch=master)
 
 React version of `priority-plus-nav` - an ARIA compliant priority plus menu.
@@ -53,6 +53,3 @@ const defaultRenderMenuItem = props => {
 
 [build-badge]: https://img.shields.io/travis/cliener/priority-plus-nav/master.png
 [build]: https://travis-ci.org/cliener/priority-plus-nav
-
-[npm-badge]: https://img.shields.io/npm/v/npm-package.png
-[npm]: https://www.npmjs.org/package/react-priority-plus-nav

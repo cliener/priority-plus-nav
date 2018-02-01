@@ -2,7 +2,7 @@
 
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
-[![Coveralls][coveralls-badge]][coveralls]
+[![Coverage Status](https://coveralls.io/repos/github/cliener/create-react-app/badge.svg?branch=master)](https://coveralls.io/github/cliener/create-react-app?branch=master)
 
 React version of `priority-plus-nav` - an ARIA compliant priority plus menu.
 
@@ -51,11 +51,8 @@ const defaultRenderMenuItem = props => {
 };
 ```
 
-[build-badge]: https://img.shields.io/travis/cliener/priority-plus-nav/master.png?style=flat-square
+[build-badge]: https://img.shields.io/travis/cliener/priority-plus-nav/master.png
 [build]: https://travis-ci.org/cliener/priority-plus-nav
 
-[npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
+[npm-badge]: https://img.shields.io/npm/v/npm-package.png
 [npm]: https://www.npmjs.org/package/react-priority-plus-nav
-
-[coveralls-badge]: https://img.shields.io/coveralls/cliener/priority-plus-nav/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/cliener/priority-plus-nav

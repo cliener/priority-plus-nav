@@ -1,6 +1,6 @@
 # react-priority-plus-nav
 
-[![Travis][build-badge]][build]
+[![Build Status](https://travis-ci.org/cliener/priority-plus-nav.svg?branch=master)](https://travis-ci.org/cliener/priority-plus-nav)
 [![npm version](https://badge.fury.io/js/react-priority-plus-nav.svg)](https://badge.fury.io/js/react-priority-plus-nav)
 [![Coverage Status](https://coveralls.io/repos/github/cliener/priority-plus-nav/badge.svg?branch=master)](https://coveralls.io/github/cliener/priority-plus-nav?branch=master)
 
@@ -50,6 +50,3 @@ const defaultRenderMenuItem = props => {
   );
 };
 ```
-
-[build-badge]: https://img.shields.io/travis/cliener/priority-plus-nav/master.png
-[build]: https://travis-ci.org/cliener/priority-plus-nav

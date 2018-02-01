@@ -1,0 +1,94 @@
+// Demo implementation styles
+
+// Set colours, borders, padding etc.
+
+body {
+  font-family: sans-serif;
+}
+
+.cdl-ppnav {
+  a {
+    text-decoration: none;
+    color: #333;
+    transition: background 175ms ease-in-out,
+                border-color 175ms ease-in-out,
+                color 175ms ease-in-out;
+
+    &:focus,
+    &:hover,
+    &:active {
+      background-color: #eee;
+    }
+  }
+
+  li + li {
+    margin-left: 12px;
+  }
+
+  > ul > li {
+    border: 1px solid #ccc;
+    transition: background 175ms ease-in-out,
+                border-color 175ms ease-in-out,
+                color 175ms ease-in-out;
+
+    &:hover {
+      border-color: #666;
+    }
+
+    > a {
+      padding: 10px 15px;      
+    }
+  }
+
+  .cdl-ppnav__item--active {
+    border-color: #000;
+
+    a {
+      cursor: default;
+      background-color: #333;
+      color: #eee;
+    }
+  }
+
+  .cdl-ppnav__button::after {
+    content: "\25bc";
+    font-size: 0.7em;
+    padding-left: 0.3em;
+  }
+
+  .cdl-ppnav__list {
+    margin-left: -1px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+
+    .cdl-ppnav__indicator--active & {
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+
+    > li + li {
+      margin-left: 0;
+    }
+
+    li {
+      display: block;
+    }
+
+    a {
+      display: block;
+      padding: 7px 15px 8px;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background: #eee;
+      }
+    }
+  }
+
+  &__button--compact {
+    border: 1px solid;
+    padding: 0.3em;
+  }
+}

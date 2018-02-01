@@ -1,0 +1,58 @@
+// Overflow nav
+// Variation of Priority Plus
+
+.menu-overflow__container {
+  overflow: hidden;
+}
+
+.overflow-nav {
+  [aria-hidden="true"] {
+    display: none;
+  }
+
+  .overflow-nav__indicator {
+  }
+
+  .overflow-nav__button--active {
+    border: 1px solid $jlt-blue;
+    padding: 9px 10px 11px;
+    margin: 21px 0 22px;
+
+    @media screen and (min-width: $break-espresso) {
+      padding: 15px;
+      margin: 26px 0 27px;
+    }
+  }
+}
+
+.overflow-nav__list {
+  display: none;
+
+  .overflow-nav__indicator--active & {
+    z-index: 10;
+    display: block;
+    position: absolute;
+    right: 0;
+    background: $pure-white;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    column-count: 2;
+
+    @media screen and (min-width: $break-espresso) {
+      column-count: 1;
+    }
+  }
+
+  > li {
+    display: block;
+  }
+
+  a {
+    padding: 10px 15px;
+  }
+}
+
+.overflow-nav__indicator--active {
+  > a {
+    @include header-nav-main-active-state();
+  }
+}

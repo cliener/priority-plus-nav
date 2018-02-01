@@ -1,0 +1,31 @@
+{
+  "name": "priority-plus-nav",
+  "version": "1.0.0",
+  "description": "Accessible Priority Plus responsive web navigation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cliener/priority-plus-nav.git"
+  },
+  "keywords": [
+    "A11y",
+    "Accessibility",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Navigation",
+    "Priority",
+    "Plus",
+    "Responsive",
+    "Web"
+  ],
+  "author": "Chris Lienert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cliener/priority-plus-nav/issues"
+  },
+  "homepage": "https://github.com/cliener/priority-plus-nav#readme"
+}

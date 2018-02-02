@@ -6,6 +6,16 @@
 
 React version of `priority-plus-nav` - an ARIA compliant priority plus menu.
 
+## Installation
+
+```
+$ npm i @cliener/react-priority-plus-nav
+```
+
+## About
+
+Need a robust responsive menu for your site? Look no further than the priority plus pattern. The pattern has been well described by [Brad Frost](http://bradfrost.com/blog/post/revisiting-the-priority-pattern/ "Revisiting the Priority+ Pattern") and [CSS Tricks](https://css-tricks.com/the-priority-navigation-pattern/ "The Priority+ Navigation Pattern").
+
 ## Parameters
 
 ### menuItems

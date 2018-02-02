@@ -9,7 +9,7 @@ React version of `priority-plus-nav` - an ARIA compliant priority plus menu.
 ## Installation
 
 ```
-$ npm i @cliener/react-priority-plus-nav
+$ npm i react-priority-plus-nav
 ```
 
 ## About

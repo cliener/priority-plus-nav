@@ -1,6 +1,6 @@
 {
   "name": "react-priority-plus-nav",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Accessible Priority Plus responsive web navigation React Component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -24,7 +24,7 @@
     "umd"
   ],
   "scripts": {
-    "build": "nwb build-react-component",
+    "build": "nwb build-react-component --copy-files",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo --plugins sass",
     "test": "nwb test-react",

@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import "./ppnav.scss";
 
 const baseClassName = "cdl-ppnav";
 

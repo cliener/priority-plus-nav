@@ -1,0 +1,65 @@
+// CDL Priority Plus Navigation
+//
+// Bare bones styles intended to overridden
+// See demo.scss for an example of a complete implementation
+
+.cdl-ppnav {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  a {
+    display: inline-block;
+  }
+
+  .cdl-overflow__indicator {
+    &.block {
+      display: inline-block;
+    }
+  }
+
+  // Rendered to calculate element dimensions
+  &__hiddenNav {
+    // Absolute position means it won't disrupt the flow
+    position: absolute;
+    // Hidden but still displayed so we can calculate dimensions
+    visibility: hidden;
+  }
+
+  &__list {
+    display: block;
+    position: absolute;
+    z-index: 10;
+
+    &[aria-hidden="true"] {
+      // Hidden but still displayed so we can calculate dimensions.
+      // Technically this isn't required but React gets confused since
+      // we're effectively cloning the elements
+      visibility: hidden;
+    }
+
+    &[aria-hidden="false"] {
+      visibility: visible;
+    }
+
+    .cdl-ppnav__indicator--active & {
+      z-index: 10;
+      display: block;
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  &__indicator {
+    &[aria-hidden="true"] {
+      display: none;
+    }
+  }
+}

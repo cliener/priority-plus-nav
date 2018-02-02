@@ -6,6 +6,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import "./ppnav.scss";
 
 var baseClassName = "cdl-ppnav";
 

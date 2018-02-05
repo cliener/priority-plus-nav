@@ -9,13 +9,13 @@ Need a robust React responsive menu for your site? Look no further than the prio
 ## Features
 
 Take a horizontal menu…
-![Wide horizontal menu](images/pp-wide.png)
+![Wide horizontal menu](images/ppnav-wide.png)
 
 …squish it…
-![Mid-size horizontal menu showing wrapped menu](images/pp-mid.png)
+![Mid-size horizontal menu showing wrapped menu](images/ppnav-mid.png)
 
 …and some more…
-![Narrow horizontal menu showing collapse down to one item](images/pp-narrow.png)
+![Narrow horizontal menu showing collapse down to one item](images/ppnav-narrow.png)
 
 …and the menu doesn't break!
 

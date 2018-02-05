@@ -46,8 +46,8 @@ class PriorityPlusNav extends Component {
 
     if (this.activeMenu) {
       // Combine the shown and hidden menu items to get accurate widths
-      const activeMenuChildren = [...this.activeMenu.children];
-      itemRefs = activeMenuChildren.slice(0, activeMenuChildren.length - 1).concat([...this.hiddenMenu.children]);
+      const activeMenuChildren = [].concat(...this.activeMenu.children);
+      itemRefs = activeMenuChildren.slice(0, activeMenuChildren.length - 1).concat([].concat(...this.hiddenMenu.children));
     } else {
       // if the active menu hasn't yet rendered, go ahead with the item references
       itemRefs = this.state.itemRefs;
@@ -75,10 +75,25 @@ class PriorityPlusNav extends Component {
 
     // If some elements are wrapped, make sure there's room for the overflow button
     if (active.length < items.length) {
-      if (
-        totalWidth + this.itemMargin + this.overflowButton.offsetWidth > parentWidth
+      // get the active menu item refs
+      const activeRefs = itemRefs.slice(0, overflowedIndex === -1 ? items.length : overflowedIndex);
+
+      //calculate the total active width
+      totalWidth = activeRefs.reduce((sum, item) => {
+        return sum + item.offsetWidth + this.itemMargin;
+      }, 0);
+
+      // add width of overflow button to total
+      totalWidth = totalWidth + this.overflowButton.offsetWidth;
+
+      // while there isn't enough room…
+      while (
+        totalWidth >= parentWidth
       ) {
+        // …pop the last item
         active.pop();
+        // and remove it's width
+        totalWidth = totalWidth - itemRefs[active.length].offsetWidth - this.itemMargin;
       }
     }
 

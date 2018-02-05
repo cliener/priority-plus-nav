@@ -58,8 +58,11 @@
   }
 
   &__indicator {
+    // Hidden but not displayed so we can calculate dimensions
     &[aria-hidden="true"] {
-      display: none;
+      position: absolute;
+      visibility: hidden;
+      left: 0;
     }
   }
 }

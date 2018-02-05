@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import "./ppnav.scss";
 
 const baseClassName = "cdl-ppnav";
 
@@ -33,15 +32,25 @@ class PriorityPlusNav extends Component {
 
   parentNode = null;
   overflowButton = null;
-  spaceTester = null;
-  itemRefs = [];
+  hiddenMenu = null;
+  activeMenu = null;
   itemMargin = 0;
 
+  // This is where most of the magic happens
   updateMenuItems = items => {
-    const itemRefs = this.state.itemRefs;
-
     if (items.length < 1) {
       return;
+    }
+
+    let itemRefs = [];
+
+    if (this.activeMenu) {
+      // Combine the shown and hidden menu items to get accurate widths
+      const activeMenuChildren = [...this.activeMenu.children];
+      itemRefs = activeMenuChildren.slice(0, activeMenuChildren.length - 1).concat([...this.hiddenMenu.children]);
+    } else {
+      // if the active menu hasn't yet rendered, go ahead with the item references
+      itemRefs = this.state.itemRefs;
     }
 
     if (itemRefs.length < 1) {
@@ -59,7 +68,7 @@ class PriorityPlusNav extends Component {
         itemRefs[index].offsetWidth +
         this.itemMargin;
 
-      return totalWidth > parentWidth;
+      return totalWidth >= parentWidth;
     });
 
     const active = items.slice(0, overflowedIndex === -1 ? items.length : overflowedIndex);
@@ -67,8 +76,7 @@ class PriorityPlusNav extends Component {
     // If some elements are wrapped, make sure there's room for the overflow button
     if (active.length < items.length) {
       if (
-        totalWidth + this.itemMargin + this.overflowButton.offsetWidth >=
-        parentWidth
+        totalWidth + this.itemMargin + this.overflowButton.offsetWidth > parentWidth
       ) {
         active.pop();
       }
@@ -100,11 +108,13 @@ class PriorityPlusNav extends Component {
   componentWillMount() {
     const { menuItems, renderMenuItem = defaultRenderMenuItem } = this.props;
 
+    const itemRefs = [];
+
     const mappedMenuItems = menuItems.map((item, index) =>
       renderMenuItem({
         itemDetails: item,
         captureRef: li => {
-          this.itemRefs[index] = li;
+          itemRefs[index] = li;
         },
         clickHandler: this.handleMenuItemClick,
         activeClass: `${baseClassName}__item--active`,
@@ -113,29 +123,32 @@ class PriorityPlusNav extends Component {
 
     this.setState({
       items: mappedMenuItems,
-      itemRefs: this.itemRefs,
+      itemRefs: itemRefs,
     });
 
     this.updateMenuItems(mappedMenuItems);
-  }
+  };
 
   componentDidMount() {
-    this.setState({
-      itemRefs: this.itemRefs,
-    });
+    if (!this.activeMenu) {
+      return;
+    }
 
-    if (this.itemRefs.length > 1) {
-      this.itemMargin = parseInt(window.getComputedStyle(this.itemRefs[1]).marginLeft);
+    const items = this.activeMenu.children;
+
+
+    if (items.length > 1) {
+      this.itemMargin = parseInt(window.getComputedStyle(items[1]).marginLeft);
     }
 
     this.updateMenuItems(this.state.items);
 
     window.addEventListener("resize", this.handleResize);
-  }
+  };
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleResize);
-  }
+  };
 
   toggleExtendedMenu = () => {
     this.setState({
@@ -153,6 +166,25 @@ class PriorityPlusNav extends Component {
     return false;
   };
 
+  // Assign item refs
+  // Heavy on the refs because we need to interact with 
+  // DOM elements to get rendered widths etc.
+  assignParentNodeRef = nav => {
+    this.parentNode = nav;
+  };
+
+  assignOverflowButtonRef = li => {
+    this.overflowButton = li;
+  };
+
+  assignHiddenMenuRef = ul => {
+    this.hiddenMenu = ul;
+  };
+
+  assignActiveMenuRef = ul => {
+    this.activeMenu = ul;
+  };
+
   render() {
     const { MenuText = "Menu", MoreText = "More", className } = this.props;
 
@@ -161,20 +193,21 @@ class PriorityPlusNav extends Component {
     return (
       <nav
         className={`${baseClassName} ${className ? className : ""}`}
-        ref={nav => (this.parentNode = nav)}
+        ref={this.assignParentNodeRef}
       >
         {/*
-          displayed so we can calculate menu item widths as they'd normally be displayed in the top menu
+          displayed so we can calculate menu item widths 
+          as they'd normally be displayed in the top menu
         */}
-        <ul className={`${baseClassName}__hiddenNav`} aria-hidden="true">
+        <ul className={`${baseClassName}__hiddenNav`} aria-hidden="true"  ref={this.assignHiddenMenuRef}>
           {inactiveItems}
         </ul>
-        <ul>
+        <ul ref={this.assignActiveMenuRef}>
           {activeItems}
           <li
             className={`${baseClassName}__indicator`}
             aria-hidden={inactiveItems.length < 1}
-            ref={li => (this.overflowButton = li)}
+            ref={this.assignOverflowButtonRef}
           >
             <a
               href="#all-nav"

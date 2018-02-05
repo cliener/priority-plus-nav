@@ -56,7 +56,7 @@ Clone this repo and run `npm install && npm start` on your localhost to see it i
 
 ### menuItems
 
-Array of menu item objects. If you override `renderMenuItem` below, you can set apply any custom properties in here.
+Array of menu item objects. If you override `renderMenuItem` below, you can set any custom properties in here.
 
 ```
 {

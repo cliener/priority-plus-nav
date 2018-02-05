@@ -1,5 +1,5 @@
 /*!
- * react-priority-plus-nav v0.1.0
+ * react-priority-plus-nav v0.3.0
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -292,14 +292,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ppnav_scss__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ppnav_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ppnav_scss__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 
@@ -352,11 +349,20 @@ var PriorityPlusNav = function (_Component) {
       activeItems: [],
       inactiveItems: [],
       overflowActive: false
-    }, _this.parentNode = null, _this.overflowButton = null, _this.spaceTester = null, _this.itemRefs = [], _this.itemMargin = 0, _this.updateMenuItems = function (items) {
-      var itemRefs = _this.state.itemRefs;
-
+    }, _this.parentNode = null, _this.overflowButton = null, _this.hiddenMenu = null, _this.activeMenu = null, _this.itemMargin = 0, _this.updateMenuItems = function (items) {
       if (items.length < 1) {
         return;
+      }
+
+      var itemRefs = [];
+
+      if (_this.activeMenu) {
+        // Combine the shown and hidden menu items to get accurate widths
+        var activeMenuChildren = [].concat(_this.activeMenu.children);
+        itemRefs = activeMenuChildren.slice(0, activeMenuChildren.length - 1).concat([].concat(_this.hiddenMenu.children));
+      } else {
+        // if the active menu hasn't yet rendered, go ahead with the item references
+        itemRefs = _this.state.itemRefs;
       }
 
       if (itemRefs.length < 1) {
@@ -372,14 +378,14 @@ var PriorityPlusNav = function (_Component) {
       var overflowedIndex = items.findIndex(function (item, index) {
         totalWidth = totalWidth + itemRefs[index].offsetWidth + _this.itemMargin;
 
-        return totalWidth > parentWidth;
+        return totalWidth >= parentWidth;
       });
 
       var active = items.slice(0, overflowedIndex === -1 ? items.length : overflowedIndex);
 
       // If some elements are wrapped, make sure there's room for the overflow button
       if (active.length < items.length) {
-        if (totalWidth + _this.itemMargin + _this.overflowButton.offsetWidth >= parentWidth) {
+        if (totalWidth + _this.itemMargin + _this.overflowButton.offsetWidth > parentWidth) {
           active.pop();
         }
       }
@@ -413,8 +419,19 @@ var PriorityPlusNav = function (_Component) {
       event.preventDefault();
       _this.toggleExtendedMenu();
       return false;
+    }, _this.assignParentNodeRef = function (nav) {
+      _this.parentNode = nav;
+    }, _this.assignOverflowButtonRef = function (li) {
+      _this.overflowButton = li;
+    }, _this.assignHiddenMenuRef = function (ul) {
+      _this.hiddenMenu = ul;
+    }, _this.assignActiveMenuRef = function (ul) {
+      _this.activeMenu = ul;
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
+
+  // This is where most of the magic happens
+
 
   PriorityPlusNav.prototype.componentWillMount = function componentWillMount() {
     var _this2 = this;
@@ -425,11 +442,13 @@ var PriorityPlusNav = function (_Component) {
         renderMenuItem = _props$renderMenuItem === undefined ? defaultRenderMenuItem : _props$renderMenuItem;
 
 
+    var itemRefs = [];
+
     var mappedMenuItems = menuItems.map(function (item, index) {
       return renderMenuItem({
         itemDetails: item,
         captureRef: function captureRef(li) {
-          _this2.itemRefs[index] = li;
+          itemRefs[index] = li;
         },
         clickHandler: _this2.handleMenuItemClick,
         activeClass: baseClassName + "__item--active"
@@ -438,19 +457,21 @@ var PriorityPlusNav = function (_Component) {
 
     this.setState({
       items: mappedMenuItems,
-      itemRefs: this.itemRefs
+      itemRefs: itemRefs
     });
 
     this.updateMenuItems(mappedMenuItems);
   };
 
   PriorityPlusNav.prototype.componentDidMount = function componentDidMount() {
-    this.setState({
-      itemRefs: this.itemRefs
-    });
+    if (!this.activeMenu) {
+      return;
+    }
 
-    if (this.itemRefs.length > 1) {
-      this.itemMargin = parseInt(window.getComputedStyle(this.itemRefs[1]).marginLeft);
+    var items = this.activeMenu.children;
+
+    if (items.length > 1) {
+      this.itemMargin = parseInt(window.getComputedStyle(items[1]).marginLeft);
     }
 
     this.updateMenuItems(this.state.items);
@@ -462,9 +483,12 @@ var PriorityPlusNav = function (_Component) {
     window.removeEventListener("resize", this.handleResize);
   };
 
-  PriorityPlusNav.prototype.render = function render() {
-    var _this3 = this;
+  // Assign item refs
+  // Heavy on the refs because we need to interact with 
+  // DOM elements to get rendered widths etc.
 
+
+  PriorityPlusNav.prototype.render = function render() {
     var _props2 = this.props,
         _props2$MenuText = _props2.MenuText,
         MenuText = _props2$MenuText === undefined ? "Menu" : _props2$MenuText,
@@ -481,27 +505,23 @@ var PriorityPlusNav = function (_Component) {
       "nav",
       {
         className: baseClassName + " " + (className ? className : ""),
-        ref: function ref(nav) {
-          return _this3.parentNode = nav;
-        }
+        ref: this.assignParentNodeRef
       },
       __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         "ul",
-        { className: baseClassName + "__hiddenNav", "aria-hidden": "true" },
+        { className: baseClassName + "__hiddenNav", "aria-hidden": "true", ref: this.assignHiddenMenuRef },
         inactiveItems
       ),
       __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         "ul",
-        null,
+        { ref: this.assignActiveMenuRef },
         activeItems,
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           "li",
           {
             className: baseClassName + "__indicator",
             "aria-hidden": inactiveItems.length < 1,
-            ref: function ref(li) {
-              return _this3.overflowButton = li;
-            }
+            ref: this.assignOverflowButtonRef
           },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             "a",
@@ -1286,12 +1306,6 @@ module.exports = checkPropTypes;
 /***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_11__;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ])["default"];

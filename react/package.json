@@ -1,6 +1,6 @@
 {
   "name": "react-priority-plus-nav",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Accessible Priority Plus responsive web navigation React Component",
   "main": "lib/index.js",
   "module": "es/index.js",

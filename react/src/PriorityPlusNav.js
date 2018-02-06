@@ -62,8 +62,12 @@ class PriorityPlusNav extends Component {
     }
 
     let totalWidth = 0;
-    const parentWidth = this.parentNode.offsetWidth;
+    const parentStyle = window.getComputedStyle(this.parentNode);
+    // Remove padding from parent width calculation
+    const parentWidth = this.parentNode.clientWidth - parseInt(parentStyle.paddingLeft) - parseInt(parentStyle.paddingRight);
+
     const overflowedIndex = items.findIndex((item, index) => {
+
       totalWidth = totalWidth +
         itemRefs[index].offsetWidth +
         this.itemMargin;

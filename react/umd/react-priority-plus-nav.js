@@ -1,5 +1,5 @@
 /*!
- * react-priority-plus-nav v0.3.0
+ * react-priority-plus-nav v1.0.1
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -376,8 +376,12 @@ var PriorityPlusNav = function (_Component) {
       }
 
       var totalWidth = 0;
-      var parentWidth = _this.parentNode.offsetWidth;
+      var parentStyle = window.getComputedStyle(_this.parentNode);
+      // Remove padding from parent width calculation
+      var parentWidth = _this.parentNode.clientWidth - parseInt(parentStyle.paddingLeft) - parseInt(parentStyle.paddingRight);
+
       var overflowedIndex = items.findIndex(function (item, index) {
+
         totalWidth = totalWidth + itemRefs[index].offsetWidth + _this.itemMargin;
 
         return totalWidth >= parentWidth;

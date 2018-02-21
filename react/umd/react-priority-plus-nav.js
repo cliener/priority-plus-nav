@@ -1,5 +1,5 @@
 /*!
- * react-priority-plus-nav v1.0.1
+ * react-priority-plus-nav v1.0.3
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -511,10 +511,10 @@ var PriorityPlusNav = function (_Component) {
 
   PriorityPlusNav.prototype.render = function render() {
     var _props2 = this.props,
-        _props2$MenuText = _props2.MenuText,
-        MenuText = _props2$MenuText === undefined ? "Menu" : _props2$MenuText,
-        _props2$MoreText = _props2.MoreText,
-        MoreText = _props2$MoreText === undefined ? "More" : _props2$MoreText,
+        _props2$menuText = _props2.menuText,
+        menuText = _props2$menuText === undefined ? "Menu" : _props2$menuText,
+        _props2$moreText = _props2.moreText,
+        moreText = _props2$moreText === undefined ? "More" : _props2$moreText,
         className = _props2.className;
     var _state = this.state,
         activeItems = _state.activeItems,
@@ -551,7 +551,7 @@ var PriorityPlusNav = function (_Component) {
               className: baseClassName + "__button " + (activeItems.length > 0 ? "" : baseClassName + "__button--compact"),
               onClick: this.handleOverflowMenuClick
             },
-            activeItems.length > 0 ? MoreText : MenuText
+            activeItems.length > 0 ? moreText : menuText
           ),
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             "ul",
@@ -568,8 +568,8 @@ var PriorityPlusNav = function (_Component) {
 
 PriorityPlusNav.propTypes = {
   renderMenuItem: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.func,
-  MenuText: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.string,
-  MoreText: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.string,
+  menuText: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.string,
+  moreText: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.string,
   menuItems: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.array,
   className: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.string
 };

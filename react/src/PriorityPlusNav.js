@@ -205,7 +205,7 @@ class PriorityPlusNav extends Component {
   };
 
   render() {
-    const { MenuText = "Menu", MoreText = "More", className } = this.props;
+    const { menuText = "Menu", moreText = "More", className } = this.props;
 
     const { activeItems, overflowActive, inactiveItems } = this.state;
 
@@ -235,7 +235,7 @@ class PriorityPlusNav extends Component {
               }`}
               onClick={this.handleOverflowMenuClick}
             >
-              {activeItems.length > 0 ? MoreText : MenuText}
+              {activeItems.length > 0 ? moreText : menuText}
             </a>
             <ul className={`${baseClassName}__list`} aria-hidden={!overflowActive}>
               {inactiveItems}
@@ -249,8 +249,8 @@ class PriorityPlusNav extends Component {
 
 PriorityPlusNav.propTypes = {
   renderMenuItem: PropTypes.func,
-  MenuText: PropTypes.string,
-  MoreText: PropTypes.string,
+  menuText: PropTypes.string,
+  moreText: PropTypes.string,
   menuItems: PropTypes.array,
   className: PropTypes.string,
 };

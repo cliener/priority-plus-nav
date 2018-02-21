@@ -228,10 +228,10 @@ var PriorityPlusNav = function (_Component) {
 
   PriorityPlusNav.prototype.render = function render() {
     var _props2 = this.props,
-        _props2$MenuText = _props2.MenuText,
-        MenuText = _props2$MenuText === undefined ? "Menu" : _props2$MenuText,
-        _props2$MoreText = _props2.MoreText,
-        MoreText = _props2$MoreText === undefined ? "More" : _props2$MoreText,
+        _props2$menuText = _props2.menuText,
+        menuText = _props2$menuText === undefined ? "Menu" : _props2$menuText,
+        _props2$moreText = _props2.moreText,
+        moreText = _props2$moreText === undefined ? "More" : _props2$moreText,
         className = _props2.className;
     var _state = this.state,
         activeItems = _state.activeItems,
@@ -268,7 +268,7 @@ var PriorityPlusNav = function (_Component) {
               className: baseClassName + "__button " + (activeItems.length > 0 ? "" : baseClassName + "__button--compact"),
               onClick: this.handleOverflowMenuClick
             },
-            activeItems.length > 0 ? MoreText : MenuText
+            activeItems.length > 0 ? moreText : menuText
           ),
           _react2.default.createElement(
             "ul",
@@ -285,8 +285,8 @@ var PriorityPlusNav = function (_Component) {
 
 PriorityPlusNav.propTypes = process.env.NODE_ENV !== "production" ? {
   renderMenuItem: _propTypes2.default.func,
-  MenuText: _propTypes2.default.string,
-  MoreText: _propTypes2.default.string,
+  menuText: _propTypes2.default.string,
+  moreText: _propTypes2.default.string,
   menuItems: _propTypes2.default.array,
   className: _propTypes2.default.string
 } : {};
